@@ -3,6 +3,10 @@ grunt-crowdin
 
 Grunt plugin for accessing the Crowdin API
 
+## Disclaimer
+
+This is an unofficial API client library. Crowdin and the Crowdin API are the property of Crowdin, LLC.
+
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
 
@@ -56,12 +60,12 @@ The directory to extract translations files to.
 #### options.writeConfig
 Type: `String` or `Object`
 
-The config file (JSON) to write available languages in.
+The config file (JSON) to write the list (Array) of available languages codes.
 
 It can be set as an `Object` accepting the following options:
 - `src`: Config file to read.
 - `dest`: Config file to write. Defaults to `src` value if not set.
-- `key`: Key to associate available translations to in the JSON. Defaults to `languages`.
+- `key`: Name of the key containing the available languages. Defaults to `languages`.
 
 ### Usage Example
 
@@ -81,5 +85,20 @@ grunt.initConfig({
 });
 ```
 
+Assuming your project contains `en_GB` and `en_US` languages, using the above configuration will create the files `data/i18n/en_GB.json` and  `data/i18n/en_US.json` with the languages keys/values, and create/update `config/i18n.json` with the following contents:
+```
+{
+    "available_languages": [
+        "en_GB",
+        "en_US"
+    ]
+}
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+## License
+
+Apache 2.0  
+Copyright 2014 Hailo

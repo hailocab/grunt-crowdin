@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         // Write available languages to config (JSON) file
         // Use `language` key by default but can be set in options
         var writeConfig = function(data) {
-            var config, contents, filepath, key;
+            var config, contents, filepath, key, template;
 
             if (grunt.util.kindOf(options.writeConfig) === 'string') {
                 options.writeConfig = {
@@ -76,6 +76,17 @@ module.exports = function(grunt) {
             config[ key ] = Object.keys(data);
 
             contents = JSON.stringify(config, null, 4);
+
+            // Apply template
+            if (options.writeConfig.tmpl && grunt.file.exists(options.writeConfig.tmpl)) {
+                template = grunt.file.read(options.writeConfig.tmpl);
+                contents = grunt.template.process(template, {
+                    data: {
+                        config: contents
+                    }
+                });
+            }
+            
             writeFile(filepath, contents);
         };
 
