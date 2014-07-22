@@ -23,13 +23,43 @@ module.exports = function(grunt) {
 
         // Local
         crowdin: {
-            default: {
+            extract: {
                 options: {
                     apiKey: '12345',
                     // Must match the URL in the `testserver` task
                     endpointUrl: 'http://localhost:9999/test',
-                    extract: 'tmp/i18n',
-                    writeConfig: 'tmp/config.json'
+                    extract: 'tmp/i18n'
+                }
+            },
+            config_simple: {
+                options: {
+                    apiKey: '12345',
+                    // Must match the URL in the `testserver` task
+                    endpointUrl: 'http://localhost:9999/test',
+                    writeConfig: 'tmp/config_simple.json'
+                }
+            },
+            config_key: {
+                options: {
+                    apiKey: '12345',
+                    // Must match the URL in the `testserver` task
+                    endpointUrl: 'http://localhost:9999/test',
+                    writeConfig: {
+                        src: 'tmp/config_key.json',
+                        key: 'available_languages'
+                    }
+                }
+            },
+            config_template: {
+                options: {
+                    apiKey: '12345',
+                    // Must match the URL in the `testserver` task
+                    endpointUrl: 'http://localhost:9999/test',
+                    writeConfig: {
+                        src: 'test/fixtures/config_template.json',
+                        tmpl: 'test/fixtures/config.tmpl.js',
+                        dest: 'tmp/config_template.js'
+                    }
                 }
             }
         },
@@ -52,7 +82,7 @@ module.exports = function(grunt) {
         var app = express();
 
         app.get('/test/download/all.zip', function(req, res) {
-            fs.createReadStream(__dirname + '/test/all.zip').pipe(res);
+            fs.createReadStream(__dirname + '/test/fixtures/all.zip').pipe(res);
         });
         app.listen(9999, done);
     });

@@ -23,22 +23,40 @@ var grunt = require('grunt');
 */
 
 exports.crowdin = {
-  extract: function(test) {
-    test.expect(1);
+    extract: function(test) {
+        test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/i18n/fr.json');
-    var expected = grunt.file.readJSON('test/expected/i18n/fr.json');
-    test.deepEqual(actual, expected, 'should have extracted the language data to a JSON file.');
+        var actual = grunt.file.readJSON('tmp/i18n/fr.json');
+        var expected = grunt.file.readJSON('test/expected/i18n/fr.json');
+        test.deepEqual(actual, expected, 'should have extracted the language data to a JSON file.');
 
-    test.done();
-  },
-  config: function(test) {
-    test.expect(1);
+        test.done();
+    },
+    config_simple: function(test) {
+        test.expect(1);
 
-    var actual = grunt.file.readJSON('tmp/config.json');
-    var expected = grunt.file.readJSON('test/expected/config.json');
-    test.deepEqual(actual, expected, 'should have written the available languages to the config file.');
+        var actual = grunt.file.readJSON('tmp/config_simple.json');
+        var expected = grunt.file.readJSON('test/expected/config_simple.json');
+        test.deepEqual(actual, expected, 'should have written the available languages to the config file.');
 
-    test.done();
-  }
+        test.done();
+    },
+    config_key: function(test) {
+        test.expect(1);
+
+        var actual = grunt.file.readJSON('tmp/config_key.json');
+        var expected = grunt.file.readJSON('test/expected/config_key.json');
+        test.deepEqual(actual, expected, 'should have written the available languages to the config file using the specified key.');
+
+        test.done();
+    },
+    config_template: function(test) {
+        test.expect(1);
+
+        var actual = grunt.file.read('tmp/config_template.js');
+        var expected = grunt.file.read('test/expected/config_template.js');
+        test.equal(actual, expected, 'should have written the available languages to the config file using the template.');
+
+        test.done();
+    }
 };

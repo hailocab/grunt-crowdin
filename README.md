@@ -66,32 +66,82 @@ It can be set as an `Object` accepting the following options:
 - `src`: Config file to read.
 - `dest`: Config file to write. Defaults to `src` value if not set.
 - `key`: Name of the key containing the available languages. Defaults to `languages`.
+- `tmpl`: Template file to apply, using [grunt.template.process](http://gruntjs.com/api/grunt.template).
+The `src` data (JSON) will be extended by the `key` and passed to the `tmpl` template as the `config` variable, before being written to `dest`. See example below.
 
 ### Usage Example
 
+#### Simple example
+
 ```js
 grunt.initConfig({
-  crowdin: {
-    options: {
-        apiKey: '36d53ad244654f0d9f6198d53b781b76', // Your Crowdin API key - must be set
-        endpointUrl: 'http://api.crowdin.net/api/project/<your-project>', // Your Crowdin project endpoint URL - must be set
-        extract: 'data/i18n',
-        writeConfig: {
-            src: 'config/i18n.json',
-            key: 'available_languages'
+    crowdin: {
+        default: {
+            options: {
+                apiKey: '36d53ad244654f0d9f6198d53b781b76', // Your Crowdin API key - must be set
+                endpointUrl: 'http://api.crowdin.net/api/project/<your-project>', // Your Crowdin project endpoint URL - must be set
+                extract: 'data/i18n',
+                writeConfig: 'config/i18n.json'
+            }
         }
-    },
-  },
+    }
 });
 ```
 
 Assuming your project contains `en_GB` and `en_US` languages, using the above configuration will create the files `data/i18n/en_GB.json` and  `data/i18n/en_US.json` with the languages keys/values, and create/update `config/i18n.json` with the following contents:
 ```
 {
-    "available_languages": [
+    "languages": [
         "en_GB",
         "en_US"
     ]
+}
+```
+
+#### Customized config
+
+```js
+// Gruntfile.js
+grunt.initConfig({
+    crowdin: {
+        default: {
+            options: {
+                apiKey: '36d53ad244654f0d9f6198d53b781b76',
+                endpointUrl: 'http://api.crowdin.net/api/project/<your-project>',
+                writeConfig: {
+                    src: 'config/i18n.json',
+                    key: 'available_languages'
+                    tmpl: 'config/template.js',
+                    dest: 'build/config.js'
+                }
+            }
+        }
+    },
+});
+
+// config/i18n.json
+{
+    "default_language": "en",
+    "json_url": "/data/i18n"
+}
+
+// config/template.js
+var config = {
+    env: "dev",
+    i18n: <%= config %>
+};
+
+// Resulting build/config.js
+var config = {
+    env: "dev",
+    i18n: {
+        "available_languages": [
+            "en_GB",
+            "en_US"
+        ],
+        "default_language": "en",
+        "json_url": "/data/i18n"
+    }
 }
 ```
 
