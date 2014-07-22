@@ -1,7 +1,7 @@
 grunt-crowdin
 =============
 
-Grunt plugin for accessing the CrowdIn.net API
+Grunt plugin for accessing the Crowdin API
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`

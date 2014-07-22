@@ -1,7 +1,8 @@
 {
   "name": "grunt-crowdin",
-  "description": "Grunt plugin for accessing the CrowdIn.net API",
+  "description": "Grunt plugin for accessing the Crowdin API",
   "version": "0.0.1",
+  "license": "Apache 2.0",
   "homepage": "https://github.com/hailocab/grunt-crowdin",
   "author": {
     "name": "Paul Le Cam",
@@ -20,14 +21,16 @@
   "scripts": {
     "test": "grunt test"
   },
-  "devDependencies": {
+  "dependencies": {
     "chalk": "^0.5.1",
     "crowdin-node": "git+ssh://git@github.com:hailocab/crowdin-node.git",
+    "lodash.foreach": "^2.4.1"
+  },
+  "devDependencies": {
     "express": "^4.6.1",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-jshint": "^0.9.2",
-    "grunt-contrib-nodeunit": "^0.3.3",
-    "lodash.foreach": "^2.4.1"
+    "grunt-contrib-nodeunit": "^0.3.3"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
