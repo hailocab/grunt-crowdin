@@ -3,7 +3,7 @@
 var chalk = require('chalk');
 var forEach = require('lodash.foreach');
 
-var Crowdin = require('crowdin-node');
+var Crowdin = require('crowdin');
 
 module.exports = function(grunt) {
 
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
                     }
                 });
             }
-            
+
             writeFile(filepath, contents);
         };
 

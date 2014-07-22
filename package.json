@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "chalk": "^0.5.1",
-    "crowdin-node": "git+ssh://git@github.com:hailocab/crowdin-node.git",
+    "crowdin": "git+ssh://git@github.com:hailocab/crowdin-node.git",
     "lodash.foreach": "^2.4.1"
   },
   "devDependencies": {
