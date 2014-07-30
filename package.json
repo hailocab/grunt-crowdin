@@ -1,5 +1,5 @@
 {
-  "name": "grunt-crowdin",
+  "name": "grunt-crowdin-net",
   "description": "Grunt plugin for accessing the Crowdin API",
   "version": "0.1.0",
   "license": "Apache 2.0",
