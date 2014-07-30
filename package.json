@@ -1,7 +1,7 @@
 {
   "name": "grunt-crowdin",
   "description": "Grunt plugin for accessing the Crowdin API",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "Apache 2.0",
   "homepage": "https://github.com/hailocab/grunt-crowdin",
   "author": {
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "chalk": "^0.5.1",
-    "crowdin": "git+ssh://git@github.com:hailocab/crowdin-node.git",
+    "crowdin": "^0.1.0",
     "lodash.foreach": "^2.4.1"
   },
   "devDependencies": {

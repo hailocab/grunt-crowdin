@@ -142,7 +142,7 @@ var config = {
         "default_language": "en",
         "json_url": "/data/i18n"
     }
-}
+};
 ```
 
 ## Contributing
