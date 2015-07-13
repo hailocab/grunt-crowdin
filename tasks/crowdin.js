@@ -33,10 +33,15 @@ module.exports = function(grunt) {
         var normalize = function(data) {
             var normalized = {};
             forEach(data, function(value, key) {
-                var lang = key.replace('-', '_');
-                lang = lang.replace(/_([a-zA-Z]{2})/, function (match, p) {
-                    return '_' + p.toUpperCase();
-                });
+                var lang = key;
+                // replace codes like es-ES to simply es
+                if (options.simplify && lang.length > 2) {
+                    lang = lang.substr(0, 2);
+                } else {
+                    lang = lang.replace('-', '_').replace(/_([a-zA-Z]{2})/, function (match, p) {
+                        return '_' + p.toUpperCase();
+                    });
+                }
                 normalized[ lang ] = value;
             });
             return normalized;
